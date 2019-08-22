@@ -7,8 +7,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Quản lý bán hàng :: Logistics System </title>
+    @yield('title')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
     <base href="{{asset('')}}">
+    <link href="datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
 
@@ -72,8 +78,22 @@
 
     </div>
 </div>
+<script src="datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+    });
+</script>
 @yield('script')
+
+<script type="text/javascript">
+    $('td,th').addClass("text-center");
+</script>
 
 </body>
 </html>

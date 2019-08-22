@@ -15,7 +15,7 @@
                     Ls
                 </div>
             </li>
-            <li>
+            <li class="@if(Request::is('system/dashboard')) active @endif" >
                 <a href="/system/dashboard">
                     <i class="fa fa-th-large"></i>
                     <span class="nav-label">Tổng quan</span>
@@ -30,44 +30,44 @@
                 </a>
             </li>
 
-            <li class="active">
-                <a href="/system/product-group/index">
+            <li class="@if(Request::is('system/product-group*')) active @endif" >
+                <a>
                     <i class="fa fa-database"></i>
                     <span class="nav-label">Quản lý kho </span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level collapse">
                     <li>
-                        <a href="/system/product-group/index">
+                        <a href="/system/product-group" style="@if(Request::is('system/product-group*')) color: #a8d3ec; @endif">
                             <i class="fa fa-sitemap"></i>
                             Nhóm sản phẩm
                         </a>
                     </li>
                     <li>
-                        <a href="/system/product/index">
+                        <a href="/system/product" style="@if(Request::is('system/product/*')) color: #a8d3ec; @endif">
                             <i class="fa fa-list"></i>
                             Sản phẩm
                         </a>
                     </li>
                     <li>
-                        <a href="/system/stock/index">
+                        <a href="/system/stock" style="@if(Request::is('system/stock/*')) color: #a8d3ec; @endif">
                             <i class="fa fa-database"></i>
                             Kho hàng
                         </a>
                     </li>
                     <li>
-                        <a href="/system/inventory/index">
+                        <a href="/system/inventory/index" style="@if(Request::is('system/inventory*')) color: #a8d3ec; @endif">
                             <i class="fa fa-cubes"></i>Hàng tồn kho
                         </a>
                     </li>
                     <li>
-                        <a href="/system/stock-receipt/index">
+                        <a href="/system/stock-receipt/index" style="@if(Request::is('system/stock-receipt*')) color: #a8d3ec; @endif">
                             <i class="fa fa-indent"></i>
                             Nhập kho
                         </a>
                     </li>
                     <li>
-                        <a href="/system/return-product/index">
+                        <a href="/system/return-product/index" style="@if(Request::is('system/return-product*')) color: #a8d3ec; @endif">
                             <i class="fa fa-retweet"></i>
                             Trả hàng
                         </a>
