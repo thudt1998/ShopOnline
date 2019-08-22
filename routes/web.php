@@ -16,7 +16,13 @@ Route::get('/', function () {
 });
 
 //Route::group(['middleware'=>'auth'],function (){
-   Route::group(['prefix'=>'system'],function (){
-        Route::get('dashboard',['as'=>'admin.dashboard','uses'=>'DashboardController@index']);
-   });
+Route::group(['prefix' => 'system'], function () {
+
+    Route::get('dashboard', ['as' => 'admin.dashboard', 'uses' => 'DashboardController@index']);
+
+    Route::resource('product-group', 'ProductGroupsController')->except('destroy');
+    Route::get('product-group/delete/{id}', ['as' => 'product-group.delete', 'uses' => 'ProductGroupsController@destroy']);
+});
+
+
 //});
