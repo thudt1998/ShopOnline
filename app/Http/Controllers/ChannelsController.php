@@ -7,38 +7,30 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\ProvinceCreateRequest;
-use App\Http\Requests\ProvinceUpdateRequest;
-use App\Repositories\ProvinceRepository;
-use App\Validators\ProvinceValidator;
+use App\Http\Requests\ChannelCreateRequest;
+use App\Http\Requests\ChannelUpdateRequest;
+use App\Repositories\ChannelRepository;
+use App\Validators\ChannelValidator;
 
 /**
- * Class ProvincesController.
+ * Class ChannelsController.
  *
  * @package namespace App\Http\Controllers;
  */
-class ProvincesController extends Controller
+class ChannelsController extends Controller
 {
     /**
-     * @var ProvinceRepository
+     * @var ChannelRepository
      */
     protected $repository;
-
     /**
-     * @var ProvinceValidator
-     */
-    protected $validator;
-
-    /**
-     * ProvincesController constructor.
+     * ChannelsController constructor.
      *
-     * @param ProvinceRepository $repository
-     * @param ProvinceValidator  $validator
+     * @param ChannelRepository $repository
      */
-    public function __construct(ProvinceRepository $repository, ProvinceValidator $validator)
+    public function __construct(ChannelRepository $repository)
     {
         $this->repository = $repository;
-        $this->validator  = $validator;
     }
 
     /**
@@ -49,40 +41,40 @@ class ProvincesController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $provinces = $this->repository->all();
+        $channels = $this->repository->all();
 
         if (request()->wantsJson()) {
 
             return response()->json(
                 [
-                'data' => $provinces,
+                'data' => $channels,
                 ]
             );
         }
 
-        return view('provinces.index', compact('provinces'));
+        return view('channels.index', compact('channels'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param ProvinceCreateRequest $request
+     * @param ChannelCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(ProvinceCreateRequest $request)
+    public function store(ChannelCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $province = $this->repository->create($request->all());
+            $channel = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'Province created.',
-                'data'    => $province->toArray(),
+                'message' => 'Channel created.',
+                'data'    => $channel->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -114,18 +106,18 @@ class ProvincesController extends Controller
      */
     public function show($id)
     {
-        $province = $this->repository->find($id);
+        $channel = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json(
                 [
-                'data' => $province,
+                'data' => $channel,
                 ]
             );
         }
 
-        return view('provinces.show', compact('province'));
+        return view('channels.show', compact('channel'));
     }
 
     /**
@@ -137,32 +129,32 @@ class ProvincesController extends Controller
      */
     public function edit($id)
     {
-        $province = $this->repository->find($id);
+        $channel = $this->repository->find($id);
 
-        return view('provinces.edit', compact('province'));
+        return view('channels.edit', compact('channel'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param ProvinceUpdateRequest $request
-     * @param string                $id
+     * @param ChannelUpdateRequest $request
+     * @param string               $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(ProvinceUpdateRequest $request, $id)
+    public function update(ChannelUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $province = $this->repository->update($request->all(), $id);
+            $channel = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'Province updated.',
-                'data'    => $province->toArray(),
+                'message' => 'Channel updated.',
+                'data'    => $channel->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -203,12 +195,12 @@ class ProvincesController extends Controller
 
             return response()->json(
                 [
-                'message' => 'Province deleted.',
+                'message' => 'Channel deleted.',
                 'deleted' => $deleted,
                 ]
             );
         }
 
-        return redirect()->back()->with('message', 'Province deleted.');
+        return redirect()->back()->with('message', 'Channel deleted.');
     }
 }

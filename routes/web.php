@@ -20,8 +20,12 @@ Route::group(['prefix' => 'system'], function () {
 
     Route::get('dashboard', ['as' => 'admin.dashboard', 'uses' => 'DashboardController@index']);
 
+    Route::resource('channel', 'ChannelsController');
     Route::resource('product-group', 'ProductGroupsController')->except('destroy');
     Route::get('product-group/delete/{id}', ['as' => 'product-group.delete', 'uses' => 'ProductGroupsController@destroy']);
+
+    Route::resource('product', 'ProductsController')->except('destroy');
+    Route::get('product/delete/{id}', ['as' => 'product.delete', 'uses' => 'ProductsController@destroy']);
 });
 
 

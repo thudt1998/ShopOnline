@@ -72,7 +72,6 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            {{$productGroups->links()}}
                         </div>
                     </div>
                 </div>

@@ -33,7 +33,7 @@ class UnitsController extends Controller
      * UnitsController constructor.
      *
      * @param UnitRepository $repository
-     * @param UnitValidator $validator
+     * @param UnitValidator  $validator
      */
     public function __construct(UnitRepository $repository, UnitValidator $validator)
     {
@@ -53,9 +53,11 @@ class UnitsController extends Controller
 
         if (request()->wantsJson()) {
 
-            return response()->json([
+            return response()->json(
+                [
                 'data' => $units,
-            ]);
+                ]
+            );
         }
 
         return view('units.index', compact('units'));
@@ -64,7 +66,7 @@ class UnitsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  UnitCreateRequest $request
+     * @param UnitCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
@@ -91,10 +93,12 @@ class UnitsController extends Controller
             return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
-                return response()->json([
+                return response()->json(
+                    [
                     'error'   => true,
                     'message' => $e->getMessageBag()
-                ]);
+                    ]
+                );
             }
 
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
@@ -104,7 +108,7 @@ class UnitsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -114,9 +118,11 @@ class UnitsController extends Controller
 
         if (request()->wantsJson()) {
 
-            return response()->json([
+            return response()->json(
+                [
                 'data' => $unit,
-            ]);
+                ]
+            );
         }
 
         return view('units.show', compact('unit'));
@@ -125,7 +131,7 @@ class UnitsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -139,8 +145,8 @@ class UnitsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UnitUpdateRequest $request
-     * @param  string            $id
+     * @param UnitUpdateRequest $request
+     * @param string            $id
      *
      * @return Response
      *
@@ -169,10 +175,12 @@ class UnitsController extends Controller
 
             if ($request->wantsJson()) {
 
-                return response()->json([
+                return response()->json(
+                    [
                     'error'   => true,
                     'message' => $e->getMessageBag()
-                ]);
+                    ]
+                );
             }
 
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
@@ -183,7 +191,7 @@ class UnitsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -193,10 +201,12 @@ class UnitsController extends Controller
 
         if (request()->wantsJson()) {
 
-            return response()->json([
+            return response()->json(
+                [
                 'message' => 'Unit deleted.',
                 'deleted' => $deleted,
-            ]);
+                ]
+            );
         }
 
         return redirect()->back()->with('message', 'Unit deleted.');

@@ -33,7 +33,7 @@ class DistrictsController extends Controller
      * DistrictsController constructor.
      *
      * @param DistrictRepository $repository
-     * @param DistrictValidator $validator
+     * @param DistrictValidator  $validator
      */
     public function __construct(DistrictRepository $repository, DistrictValidator $validator)
     {
@@ -53,9 +53,11 @@ class DistrictsController extends Controller
 
         if (request()->wantsJson()) {
 
-            return response()->json([
+            return response()->json(
+                [
                 'data' => $districts,
-            ]);
+                ]
+            );
         }
 
         return view('districts.index', compact('districts'));
@@ -64,7 +66,7 @@ class DistrictsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  DistrictCreateRequest $request
+     * @param DistrictCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
@@ -91,10 +93,12 @@ class DistrictsController extends Controller
             return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
-                return response()->json([
+                return response()->json(
+                    [
                     'error'   => true,
                     'message' => $e->getMessageBag()
-                ]);
+                    ]
+                );
             }
 
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
@@ -104,7 +108,7 @@ class DistrictsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -114,9 +118,11 @@ class DistrictsController extends Controller
 
         if (request()->wantsJson()) {
 
-            return response()->json([
+            return response()->json(
+                [
                 'data' => $district,
-            ]);
+                ]
+            );
         }
 
         return view('districts.show', compact('district'));
@@ -125,7 +131,7 @@ class DistrictsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -139,8 +145,8 @@ class DistrictsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  DistrictUpdateRequest $request
-     * @param  string            $id
+     * @param DistrictUpdateRequest $request
+     * @param string                $id
      *
      * @return Response
      *
@@ -169,10 +175,12 @@ class DistrictsController extends Controller
 
             if ($request->wantsJson()) {
 
-                return response()->json([
+                return response()->json(
+                    [
                     'error'   => true,
                     'message' => $e->getMessageBag()
-                ]);
+                    ]
+                );
             }
 
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
@@ -183,7 +191,7 @@ class DistrictsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -193,10 +201,12 @@ class DistrictsController extends Controller
 
         if (request()->wantsJson()) {
 
-            return response()->json([
+            return response()->json(
+                [
                 'message' => 'District deleted.',
                 'deleted' => $deleted,
-            ]);
+                ]
+            );
         }
 
         return redirect()->back()->with('message', 'District deleted.');

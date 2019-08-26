@@ -26,7 +26,7 @@
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                 <ul>
                                     @foreach ($errors->all() as $error)
-                                        <li>{!! $error !!}</li>
+                                        <li>{{$error}}</li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -58,8 +58,8 @@
                             <div class="form-group"><label class="col-sm-2 control-label">Chọn danh mục cha</label>
                                 <div class="col-sm-10">
                                     <select class="form-control m-b" name="parent_id">
-                                        <option value="{{$productGroup->parent_id}}"
-                                                selected="">{{$productGroup->parent['name']}}</option>
+                                        <option value="{{$productGroup->parent['id']}}"
+                                                selected>{{$productGroup->parent['name']}}</option>
                                         @foreach($productGroups as $productGroup)
                                             <option value="{{$productGroup->id}}">{{$productGroup->name}}</option>
                                         @endforeach
@@ -75,6 +75,7 @@
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-2">
+                                    <a href="javascript:history.back()" class="btn btn-primary">Thoát</a>
                                     <button class="btn btn-primary" type="submit">Cập nhật thông tin</button>
                                 </div>
                             </div>
@@ -86,5 +87,3 @@
         </div>
     </div>
 @endsection
-
-

@@ -25,20 +25,13 @@ class ProductsController extends Controller
     protected $repository;
 
     /**
-     * @var ProductValidator
-     */
-    protected $validator;
-
-    /**
      * ProductsController constructor.
      *
      * @param ProductRepository $repository
-     * @param ProductValidator $validator
      */
-    public function __construct(ProductRepository $repository, ProductValidator $validator)
+    public function __construct(ProductRepository $repository)
     {
         $this->repository = $repository;
-        $this->validator  = $validator;
     }
 
     /**
@@ -48,23 +41,15 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $products = $this->repository->all();
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $products,
-            ]);
-        }
-
-        return view('products.index', compact('products'));
+        return view('admin.product.index', compact('products'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ProductCreateRequest $request
+     * @param ProductCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
@@ -91,10 +76,12 @@ class ProductsController extends Controller
             return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
-                return response()->json([
+                return response()->json(
+                    [
                     'error'   => true,
                     'message' => $e->getMessageBag()
-                ]);
+                    ]
+                );
             }
 
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
@@ -104,7 +91,7 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -114,9 +101,11 @@ class ProductsController extends Controller
 
         if (request()->wantsJson()) {
 
-            return response()->json([
+            return response()->json(
+                [
                 'data' => $product,
-            ]);
+                ]
+            );
         }
 
         return view('products.show', compact('product'));
@@ -125,7 +114,7 @@ class ProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -139,8 +128,8 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  ProductUpdateRequest $request
-     * @param  string            $id
+     * @param ProductUpdateRequest $request
+     * @param string               $id
      *
      * @return Response
      *
@@ -169,10 +158,12 @@ class ProductsController extends Controller
 
             if ($request->wantsJson()) {
 
-                return response()->json([
+                return response()->json(
+                    [
                     'error'   => true,
                     'message' => $e->getMessageBag()
-                ]);
+                    ]
+                );
             }
 
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
@@ -183,7 +174,7 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -193,10 +184,12 @@ class ProductsController extends Controller
 
         if (request()->wantsJson()) {
 
-            return response()->json([
+            return response()->json(
+                [
                 'message' => 'Product deleted.',
                 'deleted' => $deleted,
-            ]);
+                ]
+            );
         }
 
         return redirect()->back()->with('message', 'Product deleted.');
