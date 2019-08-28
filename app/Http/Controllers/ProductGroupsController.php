@@ -76,8 +76,8 @@ class ProductGroupsController extends Controller
     public function edit($id)
     {
         $productGroup = $this->repository->find($id);
-        $productGroups = $this->repository->orderBy('name', 'ASC')
-            ->findWhereNotIn('id', [$id,$productGroup->parent_id]);
+        $productGroups = $this->repository->orderBy('name', 'ASC')->findWhereNotIn('id', [$id,$productGroup->get('parent_id')]);
+//        dd($productGroups);
         return view('admin.product-group.edit', compact('productGroup', 'productGroups'));
     }
 
@@ -91,8 +91,11 @@ class ProductGroupsController extends Controller
      */
     public function update(ProductGroupUpdateRequest $request, $id)
     {
-        $productGroup = $this->repository->update($request->all(), $id);
-        return redirect()->route('product-group.index')->with('message', 'Cập nhật nhóm sản phẩm thành công!');
+        if ($request->get('parent_id') === "0") {
+            $request['parent_id'] = null;
+        }
+        $this->repository->update($request->all(), $id);
+        return redirect()->route('product-group.index')->with('flash_message', 'Cập nhật nhóm sản phẩm thành công!');
     }
 
 

@@ -59,9 +59,14 @@
                                 <div class="col-sm-10">
                                     <select class="form-control m-b" name="parent_id">
                                         <option value="{{$productGroup->parent['id']}}"
-                                                selected>{{$productGroup->parent['name']}}</option>
+                                                selected>@if($productGroup->parent_id===null)Không thuộc nhóm
+                                            nào @else{{$productGroup->parent['name']}}@endif</option>
                                         @foreach($productGroups as $productGroup)
-                                            <option value="{{$productGroup->id}}">{{$productGroup->name}}</option>
+                                            @if($productGroup->parent_id===null)
+                                                <option value="0">Không thuộc nhóm nào</option>
+                                            @else
+                                                <option value="{{$productGroup->id}}">{{$productGroup->name}}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -75,8 +80,8 @@
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-2">
-                                    <a href="javascript:history.back()" class="btn btn-primary">Thoát</a>
                                     <button class="btn btn-primary" type="submit">Cập nhật thông tin</button>
+                                    <a href="javascript:history.back()" class="btn btn-warning">Thoát</a>
                                 </div>
                             </div>
                         </form>
