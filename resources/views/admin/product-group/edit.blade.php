@@ -58,15 +58,15 @@
                             <div class="form-group"><label class="col-sm-2 control-label">Chọn danh mục cha</label>
                                 <div class="col-sm-10">
                                     <select class="form-control m-b" name="parent_id">
-                                        <option value="{{$productGroup->parent['id']}}"
-                                                selected>@if($productGroup->parent_id===null)Không thuộc nhóm
-                                            nào @else{{$productGroup->parent['name']}}@endif</option>
+                                        @if($productGroup->parent_id===null)
+                                            <option value="0" selected>Không thuộc nhóm nào</option>
+                                        @else
+                                            <option value="0">Không thuộc nhóm nào</option>
+                                            <option value="{{$productGroup->parent['id']}}"
+                                                    selected>{{$productGroup->parent['name']}}</option>
+                                        @endif
                                         @foreach($productGroups as $productGroup)
-                                            @if($productGroup->parent_id===null)
-                                                <option value="0">Không thuộc nhóm nào</option>
-                                            @else
-                                                <option value="{{$productGroup->id}}">{{$productGroup->name}}</option>
-                                            @endif
+                                            <option value="{{$productGroup->id}}">{{$productGroup->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
