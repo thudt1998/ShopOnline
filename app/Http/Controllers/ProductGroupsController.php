@@ -76,8 +76,13 @@ class ProductGroupsController extends Controller
     public function edit($id)
     {
         $productGroup = $this->repository->find($id);
-        $productGroups = $this->repository->orderBy('name', 'ASC')->findWhereNotIn('id', [$id,$productGroup->get('parent_id')]);
-//        dd($productGroups);
+        if ($productGroup['parent_id'] !== null) {
+            $productGroups = $this->repository->orderBy('name', 'ASC')
+                ->findWhereNotIn('id', [$id, $productGroup['parent_id']]);
+        } else {
+            $productGroups = $this->repository->orderBy('name', 'ASC')
+                ->findWhereNotIn('id', [$id]);
+        }
         return view('admin.product-group.edit', compact('productGroup', 'productGroups'));
     }
 
