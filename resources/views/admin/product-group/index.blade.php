@@ -27,18 +27,19 @@
                             </div>
                         </div>
                     @endif
-                        @if(Session::has('error_message'))
-                            <div class="ibox-content">
-                                <div class="alert alert-danger" style="margin-bottom:0px;">
-                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    {{ Session::get('error_message') }}
-                                </div>
+                    @if(Session::has('error_message'))
+                        <div class="ibox-content">
+                            <div class="alert alert-danger" style="margin-bottom:0px;">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {{ Session::get('error_message') }}
                             </div>
-                        @endif
+                        </div>
+                    @endif
                     <div class="ibox">
                         <div class="ibox-content">
 
-                            <table class="table table-striped table-bordered table-hover table-zip" id="dataTables-example">
+                            <table class="table table-striped table-bordered table-hover table-zip"
+                                   id="dataTables-example">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -53,7 +54,8 @@
                                     <tr>
                                         <td>{{$productGroup->id}}</td>
                                         <td>{{$productGroup->name}}</td>
-                                        <td>{{$productGroup->parent['name']}}</td>
+                                        <td>@if($productGroup->parent_id===null)Không thuộc nhóm
+                                            nào @else{{$productGroup->parent['name']}}@endif</td>
                                         <td>{{$productGroup->description}}</td>
                                         <td class="text-right footable-visible footable-last-column">
                                             <div class="btn-group">
@@ -72,7 +74,6 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            {{$productGroups->links()}}
                         </div>
                     </div>
                 </div>

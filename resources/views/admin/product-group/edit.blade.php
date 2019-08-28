@@ -26,7 +26,7 @@
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                 <ul>
                                     @foreach ($errors->all() as $error)
-                                        <li>{!! $error !!}</li>
+                                        <li>{{$error}}</li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -58,10 +58,15 @@
                             <div class="form-group"><label class="col-sm-2 control-label">Chọn danh mục cha</label>
                                 <div class="col-sm-10">
                                     <select class="form-control m-b" name="parent_id">
-                                        <option value="{{$productGroup->parent_id}}"
-                                                selected="">{{$productGroup->parent['name']}}</option>
+                                        <option value="{{$productGroup->parent['id']}}"
+                                                selected>@if($productGroup->parent_id===null)Không thuộc nhóm
+                                            nào @else{{$productGroup->parent['name']}}@endif</option>
                                         @foreach($productGroups as $productGroup)
-                                            <option value="{{$productGroup->id}}">{{$productGroup->name}}</option>
+                                            @if($productGroup->parent_id===null)
+                                                <option value="0">Không thuộc nhóm nào</option>
+                                            @else
+                                                <option value="{{$productGroup->id}}">{{$productGroup->name}}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -76,6 +81,7 @@
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-2">
                                     <button class="btn btn-primary" type="submit">Cập nhật thông tin</button>
+                                    <a href="javascript:history.back()" class="btn btn-warning">Thoát</a>
                                 </div>
                             </div>
                         </form>
@@ -86,5 +92,3 @@
         </div>
     </div>
 @endsection
-
-

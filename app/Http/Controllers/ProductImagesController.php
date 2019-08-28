@@ -33,7 +33,7 @@ class ProductImagesController extends Controller
      * ProductImagesController constructor.
      *
      * @param ProductImageRepository $repository
-     * @param ProductImageValidator $validator
+     * @param ProductImageValidator  $validator
      */
     public function __construct(ProductImageRepository $repository, ProductImageValidator $validator)
     {
@@ -53,9 +53,11 @@ class ProductImagesController extends Controller
 
         if (request()->wantsJson()) {
 
-            return response()->json([
+            return response()->json(
+                [
                 'data' => $productImages,
-            ]);
+                ]
+            );
         }
 
         return view('productImages.index', compact('productImages'));
@@ -64,7 +66,7 @@ class ProductImagesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ProductImageCreateRequest $request
+     * @param ProductImageCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
@@ -91,10 +93,12 @@ class ProductImagesController extends Controller
             return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
-                return response()->json([
+                return response()->json(
+                    [
                     'error'   => true,
                     'message' => $e->getMessageBag()
-                ]);
+                    ]
+                );
             }
 
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
@@ -104,7 +108,7 @@ class ProductImagesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -114,9 +118,11 @@ class ProductImagesController extends Controller
 
         if (request()->wantsJson()) {
 
-            return response()->json([
+            return response()->json(
+                [
                 'data' => $productImage,
-            ]);
+                ]
+            );
         }
 
         return view('productImages.show', compact('productImage'));
@@ -125,7 +131,7 @@ class ProductImagesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -139,8 +145,8 @@ class ProductImagesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  ProductImageUpdateRequest $request
-     * @param  string            $id
+     * @param ProductImageUpdateRequest $request
+     * @param string                    $id
      *
      * @return Response
      *
@@ -169,10 +175,12 @@ class ProductImagesController extends Controller
 
             if ($request->wantsJson()) {
 
-                return response()->json([
+                return response()->json(
+                    [
                     'error'   => true,
                     'message' => $e->getMessageBag()
-                ]);
+                    ]
+                );
             }
 
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
@@ -183,7 +191,7 @@ class ProductImagesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -193,10 +201,12 @@ class ProductImagesController extends Controller
 
         if (request()->wantsJson()) {
 
-            return response()->json([
+            return response()->json(
+                [
                 'message' => 'ProductImage deleted.',
                 'deleted' => $deleted,
-            ]);
+                ]
+            );
         }
 
         return redirect()->back()->with('message', 'ProductImage deleted.');
