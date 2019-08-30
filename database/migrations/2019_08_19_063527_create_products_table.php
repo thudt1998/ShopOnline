@@ -19,12 +19,12 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('product_group_id')->unsigned();
             $table->bigInteger('unit_id')->unsigned();
-            $table->string('name');
+            $table->string('product_name');
             $table->string('product_code');
             $table->string('barcode');
             $table->decimal('price');
             $table->text('description');
-            $table->integer('warning_out_of_stock');
+            $table->integer('warning_out_of_stock')->default(0);
             $table->integer('weight')->default(null);
             $table->integer('volume')->default(null);
             $table->foreign('product_group_id')->references('id')->on('product_groups');

@@ -51,8 +51,8 @@
                             @csrf
                             <div class="form-group"><label class="col-sm-2 control-label">Tên nhóm</label>
                                 <div class="col-sm-10">
-                                    <input name="name" type="text" class="form-control"
-                                           value="{{$productGroup->name}}">
+                                    <input name="product_group_name" type="text" class="form-control"
+                                           value="{{$productGroup->product_group_name}}">
                                 </div>
                             </div>
                             <div class="form-group"><label class="col-sm-2 control-label">Chọn danh mục cha</label>
@@ -63,10 +63,10 @@
                                         @else
                                             <option value="0">Không thuộc nhóm nào</option>
                                             <option value="{{$productGroup->parent['id']}}"
-                                                    selected>{{$productGroup->parent['name']}}</option>
+                                                    selected>{{$productGroup->parent['product_group_name']}}</option>
                                         @endif
                                         @foreach($productGroups as $productGroup)
-                                            <option value="{{$productGroup->id}}">{{$productGroup->name}}</option>
+                                            <option value="{{$productGroup->id}}">{{$productGroup->product_group_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

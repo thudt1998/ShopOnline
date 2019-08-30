@@ -18,10 +18,11 @@ class CreateProductGroupsTable extends Migration
 		Schema::create('product_groups', function(Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->bigInteger('parent_id')->unsigned()->nullable();
-            $table->string('name')->unique();
+            $table->string('product_group_name');
             $table->text('description')->nullable();
             $table->foreign('parent_id')->references('id')->on('product_groups');
             $table->timestamps();
+            $table->softDeletes();
 		});
 	}
 

@@ -3,6 +3,7 @@
 namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
@@ -20,7 +21,9 @@ class ProductGroup extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = ['id', 'parent_id', 'name', 'description'];
+    protected $fillable = ['id', 'parent_id', 'product_group_name', 'description'];
+
+    use SoftDeletes;
 
     public function children()
     {

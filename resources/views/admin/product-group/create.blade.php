@@ -8,9 +8,6 @@
         <div class="col-lg-10">
             <h2><i class="fa fa-sitemap"></i> Tạo mới nhóm sản phẩm</h2>
         </div>
-        <div class="col-lg-2">
-
-        </div>
     </div>
 @endsection
 
@@ -37,14 +34,14 @@
                         <form action="{{route('product-group.store')}}" method="POST" class="form-horizontal">
                             @csrf
                             <div class="form-group"><label class="col-sm-2 control-label">Tên nhóm</label>
-                                <div class="col-sm-10"><input name="name" type="text" class="form-control"></div>
+                                <div class="col-sm-10"><input name="product_group_name" type="text" class="form-control"></div>
                             </div>
                             <div class="form-group"><label class="col-sm-2 control-label">Tên danh mục cha</label>
                                 <div class="col-sm-10">
                                     <select class="form-control m-b" name="parent_id">
                                         <option value="0">--Chọn danh mục cha---</option>
                                         @foreach($productGroups as $productGroup)
-                                            <option value="{{$productGroup->id}}">{{$productGroup->name}}</option>
+                                            <option value="{{$productGroup->id}}">{{$productGroup->product_group_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

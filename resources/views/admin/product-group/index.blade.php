@@ -53,9 +53,9 @@
                                 @foreach($productGroups as $productGroup)
                                     <tr>
                                         <td>{{$productGroup->id}}</td>
-                                        <td>{{$productGroup->name}}</td>
+                                        <td>{{$productGroup->product_group_name}}</td>
                                         <td>@if($productGroup->parent_id===null)Không thuộc nhóm
-                                            nào @else{{$productGroup->parent['name']}}@endif</td>
+                                            nào @else{{$productGroup->parent['product_group_name']}}@endif</td>
                                         <td>{{$productGroup->description}}</td>
                                         <td class="text-right footable-visible footable-last-column">
                                             <div class="btn-group">
