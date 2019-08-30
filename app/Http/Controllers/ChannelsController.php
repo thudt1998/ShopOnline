@@ -110,18 +110,8 @@ class ChannelsController extends Controller
      */
     public function destroy($id)
     {
-        $deleted = $this->repository->delete($id);
+        $this->repository->delete($id);
 
-        if (request()->wantsJson()) {
-
-            return response()->json(
-                [
-                    'message' => 'Channel deleted.',
-                    'deleted' => $deleted,
-                ]
-            );
-        }
-
-        return redirect()->back()->with('message', 'Channel deleted.');
+        return redirect()->back()->with('flash_message', 'Xóa kênh bán hàng thành công!');
     }
 }

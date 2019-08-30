@@ -23,6 +23,6 @@ class Channel extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = ['id', 'name', 'link', 'status'];
+    protected $fillable = ['id', 'channel_name', 'link', 'status'];
 
 }

@@ -45,7 +45,7 @@
                                 @foreach($channels as $channel)
                                     <tr>
                                         <td>{{$channel->id}}</td>
-                                        <td>{{$channel->name}}</td>
+                                        <td>{{$channel->channel_name}}</td>
                                         <td>{{$channel->link}}</td>
                                         <td>{{$channel->status}}</td>
                                         <td>{{$channel->created_at}}</td>
@@ -56,7 +56,7 @@
                                                     <i class="fa fa-edit "></i> Sửa
                                                 </a>
                                                 <a href="#" data-toggle="modal" data-target="#confirm-delete"
-                                                   data-href=""
+                                                   data-href="{{route('channel.delete',$channel->id)}}"
                                                    class="btn-white btn btn-xs">
                                                     <i class="fa fa-trash "></i> Xoá
                                                 </a>
@@ -86,11 +86,18 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Huỷ thao tác</button>
-                    <a class="btn btn-danger btn-ok">Xoá dữ liệu</a>
+                    <a type="submit" class="btn btn-danger btn-ok">Xoá dữ liệu</a>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection
-
+@section('script')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#confirm-delete').on('show.bs.modal', function (e) {
+                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            });
+        });
+    </script>
+@endsection

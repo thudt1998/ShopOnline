@@ -24,7 +24,7 @@ class ChannelUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'channel_name' => 'required'
         ];
     }
 }

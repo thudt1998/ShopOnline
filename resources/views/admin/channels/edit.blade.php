@@ -34,7 +34,7 @@
                             @method('PATCH')
                             @csrf
                             <div class="form-group"><label class="col-sm-3 control-label">Tên kênh bán hàng</label>
-                                <div class="col-sm-9"><input value="{{$channel->name}}" name="name"
+                                <div class="col-sm-9"><input value="{{$channel->channel_name}}" name="channel_name"
                                                              type="text" class="form-control"></div>
                             </div>
                             <div class="form-group"><label class="col-sm-3 control-label">Link</label>
@@ -43,8 +43,10 @@
                             </div>
                             <div class="form-group"><label class="col-sm-3 control-label">Trạng thái</label>
                                 <div class="col-sm-9">
-                                    <input type="radio" value="1" class="" name="status" @if($channel->status===1) checked @endif>Đang hoạt động
-                                    <input type="radio" value="0" class="" name="status" @if($channel->status===0   ) checked @endif>Dừng hoạt động
+                                    <input type="radio" value="1" class="radio radio-inline" name="status"
+                                           @if($channel->status===1) checked @endif>&nbsp;Đang hoạt động
+                                    <input type="radio" value="0" class="radio radio-inline" name="status"
+                                           @if($channel->status===0   ) checked @endif>&nbsp;Dừng hoạt động
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>

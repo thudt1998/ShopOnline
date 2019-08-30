@@ -146,7 +146,8 @@ return [
     */
 
     'attributes' => [
-        'product_group_name' => 'tên nhóm sản phẩm'
+        'product_group_name' => 'tên nhóm sản phẩm',
+        'channel_name' => 'tên kênh',
     ],
 
 ];

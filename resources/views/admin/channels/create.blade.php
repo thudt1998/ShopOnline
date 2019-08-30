@@ -43,7 +43,7 @@
                             @csrf
                             <div class="form-group"><label class="col-sm-3 control-label">Kênh bán hàng</label>
                                 <div class="col-sm-9"><input placeholder="Ví dụ: Bán hàng qua Facebook"
-                                                             name="name" type="text" class="form-control"></div>
+                                                             name="channel_name" type="text" class="form-control"></div>
                             </div>
                             <div class="form-group"><label class="col-sm-3 control-label">Đường dẫn</label>
                                 <div class="col-sm-9"><input placeholder="Ví dụ: http://facebook.com"

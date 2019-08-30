@@ -18,7 +18,7 @@ class CreateDistrictsTable extends Migration
         Schema::create('districts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('province_id')->unsigned();
-            $table->string('name_district');
+            $table->string('district_name');
             $table->integer('order_number')->default(null);
             $table->integer('active')->default(1);
             $table->foreign('province_id')->references('id')->on('provinces');
