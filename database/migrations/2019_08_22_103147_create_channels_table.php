@@ -16,11 +16,12 @@ class CreateChannelsTable extends Migration
 	public function up()
 	{
 		Schema::create('channels', function(Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('link');
-            $table->integer('status');
+            $table->bigIncrements('id');
+            $table->string('channel_name');
+            $table->string('link')->nullable();
+            $table->integer('status')->default(1);
             $table->timestamps();
+            $table->softDeletes();
 		});
 	}
 

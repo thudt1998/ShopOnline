@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use Prettus\Validator\Contracts\ValidatorInterface;
-use Prettus\Validator\Exceptions\ValidatorException;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 use App\Http\Requests\ChannelCreateRequest;
 use App\Http\Requests\ChannelUpdateRequest;
 use App\Repositories\ChannelRepository;
-use App\Validators\ChannelValidator;
 
 /**
  * Class ChannelsController.
@@ -23,6 +23,7 @@ class ChannelsController extends Controller
      * @var ChannelRepository
      */
     protected $repository;
+
     /**
      * ChannelsController constructor.
      *
@@ -36,23 +37,21 @@ class ChannelsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
-        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $channels = $this->repository->all();
+        return view('admin.channels.index', compact('channels'));
+    }
 
-        if (request()->wantsJson()) {
-
-            return response()->json(
-                [
-                'data' => $channels,
-                ]
-            );
-        }
-
-        return view('channels.index', compact('channels'));
+    /**
+     * @param Request $request
+     * @return Factory|View
+     */
+    public function create(Request $request)
+    {
+        return view('admin.channels.create');
     }
 
     /**
@@ -60,64 +59,15 @@ class ChannelsController extends Controller
      *
      * @param ChannelCreateRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function store(ChannelCreateRequest $request)
     {
-        try {
+        $this->repository->create($request->all());
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
+        return redirect()->to(route('channel.index'))->with('flash_message', 'Tạo mới kênh bán hàng thành công!');
 
-            $channel = $this->repository->create($request->all());
-
-            $response = [
-                'message' => 'Channel created.',
-                'data'    => $channel->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json(
-                    [
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                    ]
-                );
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $channel = $this->repository->find($id);
-
-        if (request()->wantsJson()) {
-
-            return response()->json(
-                [
-                'data' => $channel,
-                ]
-            );
-        }
-
-        return view('channels.show', compact('channel'));
     }
 
     /**
@@ -125,58 +75,29 @@ class ChannelsController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit($id)
     {
         $channel = $this->repository->find($id);
 
-        return view('channels.edit', compact('channel'));
+        return view('admin.channels.edit', compact('channel'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param ChannelUpdateRequest $request
-     * @param string               $id
+     * @param string $id
      *
      * @return Response
      *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function update(ChannelUpdateRequest $request, $id)
     {
-        try {
+        $this->repository->update($request->all(), $id);
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
-
-            $channel = $this->repository->update($request->all(), $id);
-
-            $response = [
-                'message' => 'Channel updated.',
-                'data'    => $channel->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-
-            if ($request->wantsJson()) {
-
-                return response()->json(
-                    [
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                    ]
-                );
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        }
+        return redirect()->to(route('channel.index'))->with('flash_message', 'Sửa kênh bán hàng thành công!');
     }
 
 
@@ -185,22 +106,12 @@ class ChannelsController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {
-        $deleted = $this->repository->delete($id);
+        $this->repository->delete($id);
 
-        if (request()->wantsJson()) {
-
-            return response()->json(
-                [
-                'message' => 'Channel deleted.',
-                'deleted' => $deleted,
-                ]
-            );
-        }
-
-        return redirect()->back()->with('message', 'Channel deleted.');
+        return redirect()->back()->with('flash_message', 'Xóa kênh bán hàng thành công!');
     }
 }

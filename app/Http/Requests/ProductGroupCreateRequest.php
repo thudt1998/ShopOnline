@@ -24,7 +24,8 @@ class ProductGroupCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:product_groups',
+            'product_group_name' => 'required',
         ];
     }
+
 }

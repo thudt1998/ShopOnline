@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Mockery\Exception;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\ProductGroupCreateRequest;
@@ -77,10 +78,10 @@ class ProductGroupsController extends Controller
     {
         $productGroup = $this->repository->find($id);
         if ($productGroup['parent_id'] !== null) {
-            $productGroups = $this->repository->orderBy('name', 'ASC')
+            $productGroups = $this->repository->orderBy('product_group_name', 'ASC')
                 ->findWhereNotIn('id', [$id, $productGroup['parent_id']]);
         } else {
-            $productGroups = $this->repository->orderBy('name', 'ASC')
+            $productGroups = $this->repository->orderBy('product_group_name', 'ASC')
                 ->findWhereNotIn('id', [$id]);
         }
         return view('admin.product-group.edit', compact('productGroup', 'productGroups'));
