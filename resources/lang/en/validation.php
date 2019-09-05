@@ -95,7 +95,7 @@ return [
     'numeric' => 'The :attribute must be a number.',
     'present' => 'The :attribute field must be present.',
     'regex' => 'The :attribute format is invalid.',
-    'required' => 'Trường :attribute không được bỏ trống.',
+    'required' => ':attribute không được bỏ trống.',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
     'required_with' => 'The :attribute field is required when :values is present.',
@@ -112,7 +112,7 @@ return [
     'starts_with' => 'The :attribute must start with one of the following: :values',
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid zone.',
-    'unique' => 'The :attribute has already been taken.',
+    'unique' => ':attribute đã tồn tại.',
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
@@ -146,8 +146,10 @@ return [
     */
 
     'attributes' => [
-        'product_group_name' => 'tên nhóm sản phẩm',
-        'channel_name' => 'tên kênh',
+        'product_group_name' => 'Tên nhóm sản phẩm',
+        'channel_name' => 'Tên kênh',
+        'brand_name' => 'Tên thương hiệu',
+        'nation' => 'Quốc gia',
     ],
 
 ];

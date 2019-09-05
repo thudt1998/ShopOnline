@@ -24,7 +24,7 @@ class ChannelCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'channel_name'=>'required'
+            'channel_name'=>'required|unique'
         ];
     }
 }

@@ -18,18 +18,17 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('product_group_id')->unsigned();
-            $table->bigInteger('unit_id')->unsigned();
             $table->string('product_name');
             $table->string('product_code');
             $table->string('barcode');
-            $table->decimal('price');
+            $table->double('price');
             $table->text('description');
             $table->integer('warning_out_of_stock')->default(0);
-            $table->integer('weight')->default(null);
-            $table->integer('volume')->default(null);
+            $table->integer('weight')->default(null)->nullable();
+            $table->integer('volume')->default(null)->nullable();
             $table->foreign('product_group_id')->references('id')->on('product_groups');
-            $table->foreign('unit_id')->references('id')->on('units');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

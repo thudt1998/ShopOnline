@@ -42,7 +42,7 @@ class ChannelsController extends Controller
     public function index()
     {
         $channels = $this->repository->all();
-        return view('admin.channels.index', compact('channels'));
+        return view('admin.channel.index', compact('channels'));
     }
 
     /**
@@ -51,7 +51,7 @@ class ChannelsController extends Controller
      */
     public function create(Request $request)
     {
-        return view('admin.channels.create');
+        return view('admin.channel.create');
     }
 
     /**
@@ -81,7 +81,7 @@ class ChannelsController extends Controller
     {
         $channel = $this->repository->find($id);
 
-        return view('admin.channels.edit', compact('channel'));
+        return view('admin.channel.edit', compact('channel'));
     }
 
     /**

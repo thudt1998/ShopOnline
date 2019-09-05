@@ -2,7 +2,7 @@
     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn"><i class="fa fa-bars"></i> </a>
-            <a href="system/channel" class="minimalize-styl-2 btn"><i class="fa fa-cogs"></i> Cài đặt </a>
+            <a href="{{route('channel.index')}}" class="minimalize-styl-2 btn"><i class="fa fa-cogs"></i> Cài đặt </a>
             <a style="background-color: #4e5863;border-color: #4e5863;color: #dcf1ff;border-right: solid 1px #677d90;" href="system/orders/index?filter-order-status=0" class="minimalize-styl-2 btn"><i class="fa fa-undo"></i>
                 Đơn chờ duyệt
             </a>

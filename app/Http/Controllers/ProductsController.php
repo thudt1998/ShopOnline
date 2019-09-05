@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\ProductCreateRequest;
@@ -37,13 +40,21 @@ class ProductsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
         $products = $this->repository->all();
-
+        $this->repository->setRoundPrice($products);
         return view('admin.product.index', compact('products'));
+    }
+
+    /**
+     * @return Factory|View
+     */
+    public function create()
+    {
+        return view('admin.product.index');
     }
 
     /**
@@ -51,7 +62,7 @@ class ProductsController extends Controller
      *
      * @param ProductCreateRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
@@ -65,7 +76,7 @@ class ProductsController extends Controller
 
             $response = [
                 'message' => 'Product created.',
-                'data'    => $product->toArray(),
+                'data' => $product->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -78,8 +89,8 @@ class ProductsController extends Controller
             if ($request->wantsJson()) {
                 return response()->json(
                     [
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
+                        'error' => true,
+                        'message' => $e->getMessageBag()
                     ]
                 );
             }
@@ -93,22 +104,13 @@ class ProductsController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
         $product = $this->repository->find($id);
 
-        if (request()->wantsJson()) {
-
-            return response()->json(
-                [
-                'data' => $product,
-                ]
-            );
-        }
-
-        return view('products.show', compact('product'));
+        return view('admin.product.show', compact('product'));
     }
 
     /**
@@ -116,7 +118,7 @@ class ProductsController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit($id)
     {
@@ -129,7 +131,7 @@ class ProductsController extends Controller
      * Update the specified resource in storage.
      *
      * @param ProductUpdateRequest $request
-     * @param string               $id
+     * @param string $id
      *
      * @return Response
      *
@@ -145,7 +147,7 @@ class ProductsController extends Controller
 
             $response = [
                 'message' => 'Product updated.',
-                'data'    => $product->toArray(),
+                'data' => $product->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -160,8 +162,8 @@ class ProductsController extends Controller
 
                 return response()->json(
                     [
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
+                        'error' => true,
+                        'message' => $e->getMessageBag()
                     ]
                 );
             }
@@ -176,7 +178,7 @@ class ProductsController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {
@@ -186,8 +188,8 @@ class ProductsController extends Controller
 
             return response()->json(
                 [
-                'message' => 'Product deleted.',
-                'deleted' => $deleted,
+                    'message' => 'Product deleted.',
+                    'deleted' => $deleted,
                 ]
             );
         }

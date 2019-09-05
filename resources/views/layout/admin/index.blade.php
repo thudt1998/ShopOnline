@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     @yield('title')
-
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
     <base href="{{asset('')}}">
     <link href="datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
 

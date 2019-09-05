@@ -22,15 +22,6 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/system/units/index"
-                        @if(
-                            Request::is('system/units/*')
-                        )  {!! 'style="color: #115c8c;font-weight: 600;"' !!} @endif>
-                            <i class="fa fa-ticket"></i>
-                            Đơn vị đo sản phẩm
-                        </a>
-                    </li>
-                    <li>
                         <a href="/system/supplier/index"
                         @if(
                             Request::is('system/supplier/*')

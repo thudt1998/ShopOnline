@@ -30,7 +30,7 @@
                 </a>
             </li>
 
-            <li class="@if(Request::is('system/product*')) active @endif">
+            <li class="@if(Request::is('system/product*')||Request::is('system/brand*')) active @endif">
                 <a>
                     <i class="fa fa-database"></i>
                     <span class="nav-label">Quản lý kho </span>
@@ -45,7 +45,15 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/system/product" style="@if(Request::is('system/product/*')||Request::is('system/product')) color: #a8d3ec; @endif">
+                        <a href="/system/brand"
+                           style="@if(Request::is('system/brand*')) color: #a8d3ec; @endif">
+                            <i class="fa fa-copyright"></i>
+                            Thương hiệu
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/system/product"
+                           style="@if(Request::is('system/product/*')||Request::is('system/product')) color: #a8d3ec; @endif">
                             <i class="fa fa-list"></i>
                             Sản phẩm
                         </a>

@@ -16,7 +16,7 @@ class CreateDistrictsTable extends Migration
     public function up()
     {
         Schema::create('districts', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('province_id')->unsigned();
             $table->string('district_name');
             $table->integer('order_number')->default(null);

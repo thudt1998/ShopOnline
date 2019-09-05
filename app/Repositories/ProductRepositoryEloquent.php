@@ -25,7 +25,18 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
         return Product::class;
     }
 
-    
+    /**
+     * @param $products
+     * @return mixed|void
+     */
+    public function setRoundPrice($products)
+    {
+        foreach ($products as $product)
+        {
+            $product->price=number_format($product->price,0,'.','.');
+        }
+    }
+
 
     /**
      * Boot up the repository, pushing criteria
@@ -34,5 +45,5 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }
