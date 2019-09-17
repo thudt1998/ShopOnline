@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('product_code');
             $table->string('barcode');
             $table->double('price');
-            $table->text('description');
+            $table->longText('description');
             $table->integer('warning_out_of_stock')->default(0);
             $table->integer('weight')->default(null)->nullable();
             $table->integer('volume')->default(null)->nullable();

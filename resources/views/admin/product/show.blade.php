@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div>
-                        <table class="table table-bordered table-hover table-zip">
+                        <table class="table table-bordered table-hover table-zip table-striped">
                             <tr>
                                 <td>#</td>
                                 <td>{{$product->id}}</td>

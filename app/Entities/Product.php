@@ -39,4 +39,9 @@ class Product extends Model implements Transformable
     {
         return $this->belongsTo(Brand::class, 'brand_id');
     }
+
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class, 'product_id');
+    }
 }

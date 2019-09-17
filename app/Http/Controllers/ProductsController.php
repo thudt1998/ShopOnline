@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\BrandRepository;
+use App\Repositories\ProductGroupRepository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 
@@ -13,7 +15,6 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\ProductCreateRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Repositories\ProductRepository;
-use App\Validators\ProductValidator;
 
 /**
  * Class ProductsController.
@@ -28,13 +29,27 @@ class ProductsController extends Controller
     protected $repository;
 
     /**
+     * @var ProductGroupRepository
+     */
+    protected $productGroupRepository;
+
+    /**
+     * @var BrandRepository
+     */
+    protected $brandRepository;
+
+    /**
      * ProductsController constructor.
      *
      * @param ProductRepository $repository
+     * @param ProductGroupRepository $productGroupRepository
+     * @param BrandsController $brandRepository
      */
-    public function __construct(ProductRepository $repository)
+    public function __construct(ProductRepository $repository, ProductGroupRepository $productGroupRepository, BrandRepository $brandRepository)
     {
         $this->repository = $repository;
+        $this->productGroupRepository = $productGroupRepository;
+        $this->brandRepository = $brandRepository;
     }
 
     /**
@@ -54,7 +69,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('admin.product.index');
+        $productGroups = $this->productGroupRepository->all();
+        $brands = $this->brandRepository->all();
+        return view('admin.product.create', compact('productGroups', 'brands'));
     }
 
     /**
@@ -68,35 +85,8 @@ class ProductsController extends Controller
      */
     public function store(ProductCreateRequest $request)
     {
-        try {
-
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
-
-            $product = $this->repository->create($request->all());
-
-            $response = [
-                'message' => 'Product created.',
-                'data' => $product->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json(
-                    [
-                        'error' => true,
-                        'message' => $e->getMessageBag()
-                    ]
-                );
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        }
+        $this->repository->create($request->all());
+        return redirect()->back();
     }
 
     /**

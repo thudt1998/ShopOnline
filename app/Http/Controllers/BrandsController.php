@@ -3,12 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use Illuminate\View\View;
-use Prettus\Validator\Contracts\ValidatorInterface;
-use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\BrandCreateRequest;
 use App\Http\Requests\BrandUpdateRequest;
 use App\Repositories\BrandRepository;
