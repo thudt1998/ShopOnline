@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -24,9 +23,10 @@
     <link href="css/plugins/summernote/summernote.css" rel="stylesheet">
     <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
 
-    @yield('links')
 
-    <!-- Mainly scripts -->
+@yield('links')
+
+<!-- Mainly scripts -->
     <script src="js/jquery-2.1.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
@@ -51,7 +51,7 @@
     <script src="js/core/core.js"></script>
 
     <script type="text/javascript">
-        if(typeof App === 'undefined') {
+        if (typeof App === 'undefined') {
             var App = {};
             App.config = {
                 token: '{{ csrf_token() }}'
@@ -84,7 +84,7 @@
 
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#dataTables-example').DataTable({
             responsive: true
         });
@@ -95,6 +95,7 @@
 <script type="text/javascript">
     $('td,th').addClass("text-center");
 </script>
-
+<script src="ckeditor/ckeditor.js" type="text/javascript"></script>
+<script>CKEDITOR.replace('editor1');</script>
 </body>
 </html>
