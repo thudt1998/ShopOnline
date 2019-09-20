@@ -20,6 +20,6 @@ class ProductImage extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['id', 'product_id', 'path', 'product_primary_image'];
 
 }

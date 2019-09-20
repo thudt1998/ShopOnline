@@ -78,9 +78,11 @@ class BrandsController extends Controller
 
         if (request()->wantsJson()) {
 
-            return response()->json([
+            return response()->json(
+                [
                 'data' => $brand,
-            ]);
+                ]
+            );
         }
 
         return view('brands.show', compact('brand'));
@@ -103,7 +105,7 @@ class BrandsController extends Controller
      * Update the specified resource in storage.
      *
      * @param BrandUpdateRequest $request
-     * @param string $id
+     * @param string             $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */

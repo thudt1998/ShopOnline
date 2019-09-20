@@ -46,7 +46,7 @@ class ChannelsController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request $request
      * @return Factory|View
      */
     public function create(Request $request)
@@ -60,7 +60,6 @@ class ChannelsController extends Controller
      * @param ChannelCreateRequest $request
      *
      * @return Response
-     *
      */
     public function store(ChannelCreateRequest $request)
     {
@@ -88,10 +87,9 @@ class ChannelsController extends Controller
      * Update the specified resource in storage.
      *
      * @param ChannelUpdateRequest $request
-     * @param string $id
+     * @param string               $id
      *
      * @return Response
-     *
      */
     public function update(ChannelUpdateRequest $request, $id)
     {

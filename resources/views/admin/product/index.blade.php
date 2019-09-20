@@ -39,6 +39,7 @@
                                         <th>Thương hiệu</th>
                                         <th>Hình ảnh đại diện</th>
                                         <th>Giá bán <sup> - vnđ </sup></th>
+                                        <th>Giá khuyến mãi <sup> - vnđ </sup></th>
                                         <th width="70">Tồn kho</th>
                                         <th>Đánh giá</th>
                                         <th>Chi tiết</th>
@@ -54,8 +55,9 @@
                                             <td>{{$product->productGroup->product_group_name}}</td>
                                             <td>@if($product->brand_id===NULL)NO
                                                 BRAND @else {{$product->brand->brand_name}} @endif </td>
-                                            <td><img src=""></td>
+                                            <td><img src="{{$product->productImagePrimary}}" style="width: 100px;height: 100px"></td>
                                             <td>{{$product->price}}</td>
+                                            <td>{{$product->promotion_price}}</td>
                                             <td></td>
                                             <td>{{$product->rate}}</td>
                                             <td><a href="{{route('product.show',$product->id)}}">Xem chi tiết</a></td>

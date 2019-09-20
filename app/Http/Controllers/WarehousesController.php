@@ -33,7 +33,7 @@ class WarehousesController extends Controller
      * WarehousesController constructor.
      *
      * @param WarehouseRepository $repository
-     * @param WarehouseValidator $validator
+     * @param WarehouseValidator  $validator
      */
     public function __construct(WarehouseRepository $repository, WarehouseValidator $validator)
     {
@@ -53,9 +53,11 @@ class WarehousesController extends Controller
 
         if (request()->wantsJson()) {
 
-            return response()->json([
+            return response()->json(
+                [
                 'data' => $warehouses,
-            ]);
+                ]
+            );
         }
 
         return view('warehouses.index', compact('warehouses'));
@@ -64,7 +66,7 @@ class WarehousesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  WarehouseCreateRequest $request
+     * @param WarehouseCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
@@ -91,10 +93,12 @@ class WarehousesController extends Controller
             return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
-                return response()->json([
+                return response()->json(
+                    [
                     'error'   => true,
                     'message' => $e->getMessageBag()
-                ]);
+                    ]
+                );
             }
 
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
@@ -104,7 +108,7 @@ class WarehousesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -114,9 +118,11 @@ class WarehousesController extends Controller
 
         if (request()->wantsJson()) {
 
-            return response()->json([
+            return response()->json(
+                [
                 'data' => $warehouse,
-            ]);
+                ]
+            );
         }
 
         return view('warehouses.show', compact('warehouse'));
@@ -125,7 +131,7 @@ class WarehousesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -139,8 +145,8 @@ class WarehousesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  WarehouseUpdateRequest $request
-     * @param  string            $id
+     * @param WarehouseUpdateRequest $request
+     * @param string                 $id
      *
      * @return Response
      *
@@ -169,10 +175,12 @@ class WarehousesController extends Controller
 
             if ($request->wantsJson()) {
 
-                return response()->json([
+                return response()->json(
+                    [
                     'error'   => true,
                     'message' => $e->getMessageBag()
-                ]);
+                    ]
+                );
             }
 
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
@@ -183,7 +191,7 @@ class WarehousesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -193,10 +201,12 @@ class WarehousesController extends Controller
 
         if (request()->wantsJson()) {
 
-            return response()->json([
+            return response()->json(
+                [
                 'message' => 'Warehouse deleted.',
                 'deleted' => $deleted,
-            ]);
+                ]
+            );
         }
 
         return redirect()->back()->with('message', 'Warehouse deleted.');

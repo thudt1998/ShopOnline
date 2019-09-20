@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Constant\VRSConst;
+use App\Entities\ProductImage;
 use App\Repositories\BrandRepository;
 use App\Repositories\ProductGroupRepository;
+use App\Repositories\ProductImageRepository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -39,17 +43,29 @@ class ProductsController extends Controller
     protected $brandRepository;
 
     /**
+     * @var ProductImageRepository
+     */
+    protected $productImageRepository;
+
+    /**
      * ProductsController constructor.
      *
      * @param ProductRepository $repository
      * @param ProductGroupRepository $productGroupRepository
-     * @param BrandsController $brandRepository
+     * @param BrandRepository $brandRepository
+     * @param ProductImageRepository $productImageRepository
      */
-    public function __construct(ProductRepository $repository, ProductGroupRepository $productGroupRepository, BrandRepository $brandRepository)
+    public function __construct(
+        ProductRepository $repository,
+        ProductGroupRepository $productGroupRepository,
+        BrandRepository $brandRepository,
+        ProductImageRepository $productImageRepository
+    )
     {
         $this->repository = $repository;
         $this->productGroupRepository = $productGroupRepository;
         $this->brandRepository = $brandRepository;
+        $this->productImageRepository = $productImageRepository;
     }
 
     /**
@@ -60,6 +76,10 @@ class ProductsController extends Controller
     public function index()
     {
         $products = $this->repository->all();
+        foreach ($products as $product) {
+            $productImagePrimary = $this->productImageRepository->findWhere(['product_id' => $product->id, 'product_primary_image' => VRSConst::IMAGE_IS_PRIMARY]);
+            $product->productImagePrimary = $productImagePrimary[0]['path'];
+        }
         $this->repository->setRoundPrice($products);
         return view('admin.product.index', compact('products'));
     }
@@ -80,13 +100,15 @@ class ProductsController extends Controller
      * @param ProductCreateRequest $request
      *
      * @return Response
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function store(ProductCreateRequest $request)
     {
-        $this->repository->create($request->all());
-        return redirect()->back();
+        $product = $this->repository->create($request->all());
+        $this->repository->createProductImage([$request->file('product_primary_image')], $product->id, VRSConst::IMAGE_IS_PRIMARY);
+        if ($request->hasFile('product_image')) {
+            $this->repository->createProductImage($request->file('product_image'), $product->id, VRSConst::IMAGE_IS_NOT_PRIMARY);
+        }
+        return redirect()->route('product.index');
     }
 
     /**
@@ -99,7 +121,10 @@ class ProductsController extends Controller
     public function show($id)
     {
         $product = $this->repository->find($id);
-
+        $productImagePrimary = $this->productImageRepository->findWhere(['product_id' => $product->id, 'product_primary_image' => VRSConst::IMAGE_IS_PRIMARY]);
+        $productImages = $this->productImageRepository->findWhere(['product_id' => $product->id, 'product_primary_image' => VRSConst::IMAGE_IS_NOT_PRIMARY]);
+        $product->productImagePrimary = $productImagePrimary[0];
+        $product->productImages = $productImages;
         return view('admin.product.show', compact('product'));
     }
 

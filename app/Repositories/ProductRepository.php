@@ -12,9 +12,17 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface ProductRepository extends RepositoryInterface
 {
     /**
-     * @param $products
+     * @param  $products
      * @return mixed
      */
     public function setRoundPrice($products);
+
+    /**
+     * @param  $productImages
+     * @param  $productId
+     * @param  $imagePrimary
+     * @return mixed
+     */
+    public function createProductImage($productImages, $productId, $imagePrimary);
 
 }

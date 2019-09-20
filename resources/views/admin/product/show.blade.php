@@ -8,7 +8,7 @@
             <h2><i class="fa fa-list"></i> Chi tiết sản phẩm</h2>
         </div>
         <div class="col-lg-3 btn-add">
-            <a href="system/product/create" class="btn btn-primary "><i class="fa fa-plus"></i>&nbsp;Thêm sản phẩm</a>
+            <a href="system/product/create" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;Thêm sản phẩm</a>
         </div>
     </div>
 @endsection
@@ -39,8 +39,18 @@
                                     BRAND @else {{$product->brand->brand_name}} @endif </td>
                             </tr>
                             <tr>
-                                <td>Ảnh</td>
-                                <td></td>
+                                <td>Ảnh đại diện</td>
+                                <td><img src="{{$product->productImagePrimary['path']}}"
+                                         style="width: 100px;height: 100px"></td>
+                            </tr>
+                            <tr>
+                                <td>Ảnh chi tiết sản phẩm</td>
+                                <td>
+                                    @foreach($product->productImages as $productImage)
+                                        <img src="{{$product->productImagePrimary['path']}}"
+                                             style="width: 100px;height: 100px">
+                                    @endforeach
+                                </td>
                             </tr>
                             <tr>
                                 <td>Đánh giá</td>
@@ -59,8 +69,28 @@
                                 <td>{{$product->price}}</td>
                             </tr>
                             <tr>
+                                <td>Giá khuyến mãi</td>
+                                <td>{{$product->promotion_price}}</td>
+                            </tr>
+                            <tr>
+                                <td>Cân nặng</td>
+                                <td>@if($product->weight===null) 0 @else {{$product->weight}} @endif</td>
+                            </tr>
+                            <tr>
+                                <td>Kích thước</td>
+                                <td>@if($product->size===null) 0 @else {{$product->size}} @endif</td>
+                            </tr>
+                            <tr>
+                                <td>Thể tích</td>
+                                <td>@if($product->volume===null) 0 @else {{$product->volume}} @endif</td>
+                            </tr>
+                            <tr>
                                 <td>Mô tả</td>
                                 <td width="1000px">{{$product->description}}</td>
+                            </tr>
+                            <tr>
+                                <td>Tồn kho</td>
+                                <td></td>
                             </tr>
                         </table>
                     </div>

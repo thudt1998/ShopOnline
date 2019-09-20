@@ -56,10 +56,10 @@ return [
         'string' => 'The :attribute must be greater than or equal :value characters.',
         'array' => 'The :attribute must have :value items or more.',
     ],
-    'image' => 'The :attribute must be an image.',
+    'image' => ':attribute phải là ảnh.',
     'in' => 'The selected :attribute is invalid.',
     'in_array' => 'The :attribute field does not exist in :other.',
-    'integer' => 'The :attribute must be an integer.',
+    'integer' => ':attribute phải là số.',
     'ip' => 'The :attribute must be a valid IP address.',
     'ipv4' => 'The :attribute must be a valid IPv4 address.',
     'ipv6' => 'The :attribute must be a valid IPv6 address.',
@@ -150,6 +150,15 @@ return [
         'channel_name' => 'Tên kênh',
         'brand_name' => 'Tên thương hiệu',
         'nation' => 'Quốc gia',
+        'product_name' => 'Tên sản phẩm',
+        'product_group_id' => 'Nhóm sản phẩm',
+        'product_primary_image' => 'Ảnh đại diện sản phẩm',
+        'product_code' => 'Mã sản phẩm',
+        'barcode' => 'Mã quét sản phẩm',
+        'price' => 'Giá sản phẩm',
+        'promotion_price' => 'Giá khuyến mại',
+        'warning_out_of_stock' => 'Cảnh báo hết hàng',
+        'description' => 'Mô tả'
     ],
 
 ];

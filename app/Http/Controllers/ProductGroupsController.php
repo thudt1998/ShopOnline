@@ -91,7 +91,7 @@ class ProductGroupsController extends Controller
      * Update the specified resource in storage.
      *
      * @param ProductGroupUpdateRequest $request
-     * @param string $id
+     * @param string                    $id
      *
      * @return Response
      */
