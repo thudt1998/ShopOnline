@@ -23,8 +23,7 @@
     <link href="css/plugins/summernote/summernote.css" rel="stylesheet">
     <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
 
-
-@yield('links')
+@yield('link')
 
 <!-- Mainly scripts -->
     <script src="js/jquery-2.1.1.js"></script>

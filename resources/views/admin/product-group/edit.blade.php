@@ -73,7 +73,7 @@
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-2">
                                     <button class="btn btn-primary" type="submit">Cập nhật thông tin</button>
-                                    <a href="{{route('product_group.index')}}" class="btn btn-warning">Thoát</a>
+                                    <a href="{{route('product-group.index')}}" class="btn btn-warning">Thoát</a>
                                 </div>
                             </div>
                         </form>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Constant\VRSConst;
 use App\Repositories\BrandRepository;
 use App\Repositories\ProductGroupRepository;
 use Illuminate\Contracts\View\Factory;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -41,12 +43,15 @@ class ProductsController extends Controller
     /**
      * ProductsController constructor.
      *
-     * @param ProductRepository $repository
+     * @param ProductRepository      $repository
      * @param ProductGroupRepository $productGroupRepository
-     * @param BrandsController $brandRepository
+     * @param BrandRepository        $brandRepository
      */
-    public function __construct(ProductRepository $repository, ProductGroupRepository $productGroupRepository, BrandRepository $brandRepository)
-    {
+    public function __construct(
+        ProductRepository $repository,
+        ProductGroupRepository $productGroupRepository,
+        BrandRepository $brandRepository
+    ) {
         $this->repository = $repository;
         $this->productGroupRepository = $productGroupRepository;
         $this->brandRepository = $brandRepository;
@@ -80,12 +85,14 @@ class ProductsController extends Controller
      * @param ProductCreateRequest $request
      *
      * @return Response
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function store(ProductCreateRequest $request)
     {
-        $this->repository->create($request->all());
+        $product = $this->repository->create($request->all());
+        $this->repository->createProductImage([$request->file('product_primary_image')], $product->id, VRSConst::IMAGE_IS_PRIMARY);
+        if ($request->hasFile('product_image')) {
+            $this->repository->createProductImage($request->file('product_image'), $product->id, VRSConst::IMAGE_IS_NOT_PRIMARY);
+        }
         return redirect()->back();
     }
 
@@ -121,7 +128,7 @@ class ProductsController extends Controller
      * Update the specified resource in storage.
      *
      * @param ProductUpdateRequest $request
-     * @param string $id
+     * @param string               $id
      *
      * @return Response
      *

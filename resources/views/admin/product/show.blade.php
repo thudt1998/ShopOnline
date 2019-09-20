@@ -8,7 +8,7 @@
             <h2><i class="fa fa-list"></i> Chi tiết sản phẩm</h2>
         </div>
         <div class="col-lg-3 btn-add">
-            <a href="system/product/create" class="btn btn-primary "><i class="fa fa-plus"></i>&nbsp;Thêm sản phẩm</a>
+            <a href="system/product/create" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;Thêm sản phẩm</a>
         </div>
     </div>
 @endsection
