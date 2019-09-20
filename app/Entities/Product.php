@@ -22,7 +22,19 @@ class Product extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = ['id', 'product_group_id', 'product_name', 'product_code', 'barcode', 'price', 'description', 'warning_out_of_stock', 'weight', 'volume'];
+    protected $fillable = [
+        'id',
+        'product_group_id',
+        'product_name',
+        'product_code',
+        'barcode',
+        'price',
+        'description',
+        'warning_out_of_stock',
+        'weight',
+        'volume',
+        'promotion_price'
+        ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
