@@ -11,16 +11,15 @@
 |
 */
 
-Route::get(
-    '/', function () {
-        return view('welcome');
-    }
-);
 
-//Route::group(['middleware'=>'auth'],function (){
-Route::group(
-    ['prefix' => 'system'], function () {
-
+Route::group(['prefix' => 'auth'], function () {
+    Route::get('/', ['as' => 'login.page', 'uses' => 'UsersController@index']);
+    Route::get('/login', ['as' => 'login.page', 'uses' => 'UsersController@index']);
+    Route::post('/login', ['as' => 'login', 'uses' => 'UsersController@login']);
+    Route::get('/logout', ['as' => 'logout', 'uses' => 'UsersController@logout']);
+});
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['prefix' => 'system'], function () {
         Route::get('dashboard', ['as' => 'admin.dashboard', 'uses' => 'DashboardController@index']);
 
         Route::resource('channel', 'ChannelsController')->except('destroy');
@@ -34,8 +33,6 @@ Route::group(
 
         Route::resource('product', 'ProductsController')->except('destroy');
         Route::get('product/delete/{id}', ['as' => 'product.delete', 'uses' => 'ProductsController@destroy']);
-    }
-);
+    });
+});
 
-
-//});
