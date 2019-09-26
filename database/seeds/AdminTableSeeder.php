@@ -13,12 +13,12 @@ class AdminTableSeeder extends Seeder
     public function run()
     {
         DB::table('admins')->insert([
-            'regency'=>'Administrator',
-            'email'=>'thu.dt@deha-soft.com',
-            'password'=>'1234',
-            'full_name'=>'Dao Thi Thu',
-            'avatar'=>'',
-            'status'=>'1'
+            'regency' => 'Administrator',
+            'email' => 'thu.dt@deha-soft.com',
+            'password' => bcrypt('1234'),
+            'full_name' => 'Dao Thi Thu',
+            'avatar' => '',
+            'status' => '1'
         ]);
     }
 }

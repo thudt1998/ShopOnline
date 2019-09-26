@@ -3,16 +3,15 @@
 namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class Admin.
+ * Class UserPosition.
  *
  * @package namespace App\Entities;
  */
-class Admin extends Authenticatable implements Transformable
+class UserPosition extends Model implements Transformable
 {
     use TransformableTrait;
 

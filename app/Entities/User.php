@@ -2,17 +2,18 @@
 
 namespace App\Entities;
 
+use App\Http\Middleware\Authenticate;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class Admin.
+ * Class User.
  *
  * @package namespace App\Entities;
  */
-class Admin extends Authenticatable implements Transformable
+class User extends Authenticatable implements Transformable
 {
     use TransformableTrait;
 
@@ -21,6 +22,6 @@ class Admin extends Authenticatable implements Transformable
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['id', 'email', 'password'];
 
 }

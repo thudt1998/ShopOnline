@@ -121,10 +121,13 @@ class ProductsController extends Controller
     public function show($id)
     {
         $product = $this->repository->find($id);
-        $productImagePrimary = $this->productImageRepository->findWhere(['product_id' => $product->id, 'product_primary_image' => VRSConst::IMAGE_IS_PRIMARY]);
-        $productImages = $this->productImageRepository->findWhere(['product_id' => $product->id, 'product_primary_image' => VRSConst::IMAGE_IS_NOT_PRIMARY]);
-        $product->productImagePrimary = $productImagePrimary[0];
+        $productImages = $this->productImageRepository->findWhere(['product_id' => $product->id]);
         $product->productImages = $productImages;
+        foreach ($productImages as $productImage) {
+            if ($productImage->product_primary_image === VRSConst::IMAGE_IS_PRIMARY) {
+                $product->productImagePrimary = asset(Storage::url('product_image/' . $productImage));
+            }
+        }
         return view('admin.product.show', compact('product'));
     }
 

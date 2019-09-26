@@ -47,7 +47,7 @@
                                 <td>Ảnh chi tiết sản phẩm</td>
                                 <td>
                                     @foreach($product->productImages as $productImage)
-                                        <img src="{{$product->productImagePrimary['path']}}"
+                                        <img src="{{$productImage['path']}}"
                                              style="width: 100px;height: 100px">
                                     @endforeach
                                 </td>

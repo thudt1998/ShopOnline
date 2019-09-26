@@ -3,11 +3,15 @@
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                    <a data-toggle="dropdown" class="dropdown-toggle" style="cursor: default">
                         <span class="clear">
-                            <span class="block m-t-xs usr-name">
+                            <span class="text-muted text-xs block text-center"><h3> Quản lý hệ thống </h3></span>
+                             <span class="block m-t-xs usr-name text-center">
+                                 <img src="{{asset(Storage::url('avatar/default.jpg'))}}"
+                                      style="width: 60px;height: 50px" class="img img-circle"><br>
+                                Chào,{{ isset(Auth::user()->user_name) ? Auth::user()->user_name : Auth::user()->name }}
                             </span>
-                            <span class="text-muted text-xs block"><i class="fa fa-user"></i> Quản lý hệ thống </span>
+{{--                            <span class="block m-t-xs usr-name text-center"><a href="#">Xem thông tin cá nhân</a></span>--}}
                         </span>
                     </a>
                 </div>

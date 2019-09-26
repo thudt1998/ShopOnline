@@ -9,7 +9,7 @@
             <a style="background-color: #4e5863;border-color: #4e5863;color: #dcf1ff;" href="system/orders/index?filter-order-status=2" class="minimalize-styl-2 btn"><i class="fa fa-truck"></i>
                 Vận chuyển
             </a>
-            <a class="minimalize-styl-2 btn" href="auth/logout">
+            <a class="minimalize-styl-2 btn" href="{{route('logout')}}">
                 <i class="fa fa-sign-out"></i> Đăng xuất
             </a>
         </div>
