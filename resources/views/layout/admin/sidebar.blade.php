@@ -9,7 +9,7 @@
                              <span class="block m-t-xs usr-name text-center">
                                  <img src="{{asset(Storage::url('avatar/default.jpg'))}}"
                                       style="width: 60px;height: 50px" class="img img-circle"><br>
-                                Chào,{{ isset(Auth::user()->user_name) ? Auth::user()->user_name : Auth::user()->name }}
+{{--                                Chào,{{  Auth::user()->user_name  }}--}}
                             </span>
 {{--                            <span class="block m-t-xs usr-name text-center"><a href="#">Xem thông tin cá nhân</a></span>--}}
                         </span>

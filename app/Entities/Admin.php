@@ -2,8 +2,9 @@
 
 namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
@@ -15,12 +16,17 @@ use Prettus\Repository\Traits\TransformableTrait;
 class Admin extends Authenticatable implements Transformable
 {
     use TransformableTrait;
+    use Notifiable;
+
+    protected $guarded = 'admin';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['full_name', 'email', 'password'];
+
+    protected $hidden = ['password', 'remember_token'];
 
 }

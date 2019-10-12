@@ -4,9 +4,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateUsersTable.
+ * Class CreateAdminsTable.
  */
-class CreateUsersTable extends Migration
+class CreateAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,20 +15,14 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_position_id')->nullable()->unsigned();
-            $table->string('user_name')->default(null);
             $table->string('full_name');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('address');
-            $table->string('identity_card_number');
+            $table->string('email')->unique();
             $table->string('password');
             $table->string('avatar')->nullable();
-            $table->foreign('user_position_id')->references('id')->on('user_positions');
+            $table->tinyInteger('active')->default(1)->comment('1:active|0:unactive');
             $table->rememberToken();
-            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -40,6 +34,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+        Schema::drop('admins');
     }
 }

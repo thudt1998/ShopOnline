@@ -42,6 +42,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
             $product->promotion_price = number_format($promotionPrice, 0, '.', '.')
                 . ' ( - ' . (100 - $percentPromotion) . '% ) ';
         }
+        return $products;
     }
 
     /**

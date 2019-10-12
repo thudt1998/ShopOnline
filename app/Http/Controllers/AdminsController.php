@@ -7,38 +7,32 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\PermissionCreateRequest;
-use App\Http\Requests\PermissionUpdateRequest;
-use App\Repositories\PermissionRepository;
-use App\Validators\PermissionValidator;
+use App\Http\Requests\AdminCreateRequest;
+use App\Http\Requests\AdminUpdateRequest;
+use App\Repositories\AdminRepository;
+use App\Validators\AdminValidator;
 
 /**
- * Class PermissionsController.
+ * Class AdminsController.
  *
  * @package namespace App\Http\Controllers;
  */
-class PermissionsController extends Controller
+class AdminsController extends Controller
 {
     /**
-     * @var PermissionRepository
+     * @var AdminRepository
      */
     protected $repository;
 
     /**
-     * @var PermissionValidator
-     */
-    protected $validator;
-
-    /**
-     * PermissionsController constructor.
+     * AdminsController constructor.
      *
-     * @param PermissionRepository $repository
-     * @param PermissionValidator $validator
+     * @param AdminRepository $repository
      */
-    public function __construct(PermissionRepository $repository, PermissionValidator $validator)
+    public function __construct(AdminRepository $repository)
     {
+        $this->middleware('auth:admin');
         $this->repository = $repository;
-        $this->validator  = $validator;
     }
 
     /**
@@ -48,39 +42,29 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $permissions = $this->repository->all();
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $permissions,
-            ]);
-        }
-
-        return view('permissions.index', compact('permissions'));
+        return view('admin.dashboard');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  PermissionCreateRequest $request
+     * @param AdminCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(PermissionCreateRequest $request)
+    public function store(AdminCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $permission = $this->repository->create($request->all());
+            $admin = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'Permission created.',
-                'data'    => $permission->toArray(),
+                'message' => 'Admin created.',
+                'data' => $admin->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -92,7 +76,7 @@ class PermissionsController extends Controller
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
-                    'error'   => true,
+                    'error' => true,
                     'message' => $e->getMessageBag()
                 ]);
             }
@@ -104,59 +88,59 @@ class PermissionsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $permission = $this->repository->find($id);
+        $admin = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $permission,
+                'data' => $admin,
             ]);
         }
 
-        return view('permissions.show', compact('permission'));
+        return view('admins.show', compact('admin'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $permission = $this->repository->find($id);
+        $admin = $this->repository->find($id);
 
-        return view('permissions.edit', compact('permission'));
+        return view('admins.edit', compact('admin'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  PermissionUpdateRequest $request
-     * @param  string            $id
+     * @param AdminUpdateRequest $request
+     * @param string $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(PermissionUpdateRequest $request, $id)
+    public function update(AdminUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $permission = $this->repository->update($request->all(), $id);
+            $admin = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'Permission updated.',
-                'data'    => $permission->toArray(),
+                'message' => 'Admin updated.',
+                'data' => $admin->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -170,7 +154,7 @@ class PermissionsController extends Controller
             if ($request->wantsJson()) {
 
                 return response()->json([
-                    'error'   => true,
+                    'error' => true,
                     'message' => $e->getMessageBag()
                 ]);
             }
@@ -183,7 +167,7 @@ class PermissionsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -194,11 +178,11 @@ class PermissionsController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'Permission deleted.',
+                'message' => 'Admin deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'Permission deleted.');
+        return redirect()->back()->with('message', 'Admin deleted.');
     }
 }

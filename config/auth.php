@@ -46,6 +46,11 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ]
     ],
 
     /*
@@ -71,10 +76,10 @@ return [
             'model' => App\Entities\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Entities\Admin::class,
+        ],
     ],
 
     /*
@@ -95,6 +100,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'email' => 'auth.emails.password',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'admins' => [
+            'provider' => 'admins',
             'email' => 'auth.emails.password',
             'table' => 'password_resets',
             'expire' => 60,

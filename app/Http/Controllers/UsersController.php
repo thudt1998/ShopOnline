@@ -48,7 +48,7 @@ class UsersController extends Controller
     public function index()
     {
         if (auth()->guest()) {
-            return view('admin.login');
+            return view('user.loginPage');
         } else {
             return redirect()->route('admin.dashboard');
         }
@@ -71,10 +71,12 @@ class UsersController extends Controller
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function logout(){
+    public function logout()
+    {
         auth()->logout();
-        return redirect()->route('login.page')->with('flash_message','Bạn đã đăng xuất!');
+        return redirect()->route('login.page')->with('flash_message', 'Bạn đã đăng xuất!');
     }
+
     /**
      * Display the specified resource.
      *
@@ -95,6 +97,7 @@ class UsersController extends Controller
 
         return view('users.show', compact('user'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

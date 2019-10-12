@@ -2,16 +2,20 @@
     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn"><i class="fa fa-bars"></i> </a>
-            <a href="{{route('channel.index')}}" class="minimalize-styl-2 btn"><i class="fa fa-cogs"></i> Cài đặt </a>
-            <a style="background-color: #4e5863;border-color: #4e5863;color: #dcf1ff;border-right: solid 1px #677d90;" href="system/orders/index?filter-order-status=0" class="minimalize-styl-2 btn"><i class="fa fa-undo"></i>
+            <a href="{{route('admin.channel.index')}}" class="minimalize-styl-2 btn"><i class="fa fa-cogs"></i> Cài đặt
+            </a>
+            <a style="background-color: #4e5863;border-color: #4e5863;color: #dcf1ff;border-right: solid 1px #677d90;"
+               href="system/orders/index?filter-order-status=0" class="minimalize-styl-2 btn"><i class="fa fa-undo"></i>
                 Đơn chờ duyệt
             </a>
-            <a style="background-color: #4e5863;border-color: #4e5863;color: #dcf1ff;" href="system/orders/index?filter-order-status=2" class="minimalize-styl-2 btn"><i class="fa fa-truck"></i>
+            <a style="background-color: #4e5863;border-color: #4e5863;color: #dcf1ff;"
+               href="system/orders/index?filter-order-status=2" class="minimalize-styl-2 btn"><i
+                    class="fa fa-truck"></i>
                 Vận chuyển
             </a>
-            <a class="minimalize-styl-2 btn" href="{{route('logout')}}">
-                <i class="fa fa-sign-out"></i> Đăng xuất
-            </a>
+            {{--            <a class="minimalize-styl-2 btn" href="{{route('logout')}}">--}}
+            {{--                <i class="fa fa-sign-out"></i> Đăng xuất--}}
+            {{--            </a>--}}
         </div>
     </nav>
 </div>

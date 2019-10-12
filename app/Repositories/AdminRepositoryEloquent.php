@@ -4,16 +4,16 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\PermissionRepository;
-use App\Entities\Permission;
-use App\Validators\PermissionValidator;
+use App\Repositories\AdminRepository;
+use App\Entities\Admin;
+use App\Validators\AdminValidator;
 
 /**
- * Class PermissionRepositoryEloquent.
+ * Class AdminRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class PermissionRepositoryEloquent extends BaseRepository implements PermissionRepository
+class AdminRepositoryEloquent extends BaseRepository implements AdminRepository
 {
     /**
      * Specify Model class name
@@ -22,7 +22,7 @@ class PermissionRepositoryEloquent extends BaseRepository implements PermissionR
      */
     public function model()
     {
-        return Permission::class;
+        return Admin::class;
     }
 
     

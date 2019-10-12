@@ -40,14 +40,14 @@
                             </tr>
                             <tr>
                                 <td>Ảnh đại diện</td>
-                                <td><img src="{{$product->productImagePrimary['path']}}"
-                                         style="width: 100px;height: 100px"></td>
+{{--                                <td><img src="{{$product->productImagePrimary}}"--}}
+{{--                                         style="width: 100px;height: 100px"></td>--}}
                             </tr>
                             <tr>
                                 <td>Ảnh chi tiết sản phẩm</td>
                                 <td>
                                     @foreach($product->productImages as $productImage)
-                                        <img src="{{$productImage['path']}}"
+                                        <img src="{{$productImage}}"
                                              style="width: 100px;height: 100px">
                                     @endforeach
                                 </td>

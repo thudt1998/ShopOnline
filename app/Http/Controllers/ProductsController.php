@@ -78,7 +78,7 @@ class ProductsController extends Controller
         $products = $this->repository->all();
         foreach ($products as $product) {
             $productImagePrimary = $this->productImageRepository->findWhere(['product_id' => $product->id, 'product_primary_image' => VRSConst::IMAGE_IS_PRIMARY]);
-            $product->productImagePrimary = $productImagePrimary[0]['path'];
+            $product->productImagePrimary = asset(Storage::url('product_image/' . $productImagePrimary[0]['path']));
         }
         $this->repository->setRoundPrice($products);
         return view('admin.product.index', compact('products'));
@@ -122,12 +122,12 @@ class ProductsController extends Controller
     {
         $product = $this->repository->find($id);
         $productImages = $this->productImageRepository->findWhere(['product_id' => $product->id]);
-        $product->productImages = $productImages;
+        $images = array();
         foreach ($productImages as $productImage) {
-            if ($productImage->product_primary_image === VRSConst::IMAGE_IS_PRIMARY) {
-                $product->productImagePrimary = asset(Storage::url('product_image/' . $productImage));
-            }
+            $image = asset(Storage::url('product_image/' . $productImage['path']));
+            array_push($images, $image);
         }
+        $product->productImages = $images;
         return view('admin.product.show', compact('product'));
     }
 
